@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <title>Auto PhonePe Payment</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+  <h2>PhonePe से पेमेंट</h2>
+  <p>अगर ऐप ऑटोमैटिक नहीं खुलता तो नीचे दिए लिंक पर क्लिक करें:</p>
+
+  <a id="payLink"
+     href="upi://pay?pa=yourupi@upi&pn=Your%20Name&am=10&tn=Test%20Payment&cu=INR"
+     style="display:inline-block;padding:14px 22px;background:#5b2be0;color:#fff;border-radius:10px;font-size:18px;text-decoration:none;">
+    Pay with PhonePe
+  </a>
+
+  <script>
+    // यहाँ अपनी UPI details डालें
+    const vpa  = "yourupi@upi";     // <- आपकी UPI ID
+    const name = "Your Name";       // <- आपका नाम
+    const amt  = "10";              // <- राशि
+    const note = "Test Payment";    // <- remark
+    const txn  = "TXN12345";        // <- transaction reference
+
+    const upiLink = `upi://pay?pa=${encodeURIComponent(vpa)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amt)}&tn=${encodeURIComponent(note)}&tr=${encodeURIComponent(txn)}&cu=INR`;
+
+    // fallback link सेट करना
+    document.getElementById("payLink").href = upiLink;
+
+    // पेज लोड होते ही redirect कर दो
+    window.onload = function() {
+      window.location.href = upiLink;
+    };
+  </script>
+</body>
+</html>
